@@ -341,7 +341,7 @@ class SecureHttpClient
             $this->dataSigner->signData($encodedProtected.'.'.$encodedPayload, $privateKey, $algorithm, $format)
         );
 
-        $this->currentSign = $protected['kid'] ? self::SIGN_KID : self::SIGN_JWK;
+        $this->currentSign = \array_key_exists('kid', $protected) ? self::SIGN_KID : self::SIGN_JWK;
         $this->currentPayload = $payload;
         $this->currentKid = $protected['kid'] ?? null;
 
